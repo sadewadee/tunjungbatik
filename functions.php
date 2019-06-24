@@ -1,7 +1,4 @@
 <?php
-
-
-
 /*=============================================
 =            BREADCRUMBS			            =
 =============================================*/
@@ -9,7 +6,7 @@
 function the_breadcrumb() {
     $sep = ' / ';
     if (!is_front_page()) {
-	
+
 	// Start the breadcrumb with a link to your homepage
         echo '<div class="breadcrumbs">';
         echo '<a href="';
@@ -17,7 +14,7 @@ function the_breadcrumb() {
         echo '">';
         bloginfo('name');
         echo '</a>' . $sep;
-	
+
 	// Check if the current page is a category, an archive or a single page. If so show the category or archive name.
         if (is_category() || is_single() ){
             the_category(' / ');
@@ -32,23 +29,23 @@ function the_breadcrumb() {
                 _e( 'Blog Archives', 'text_domain' );
             }
         }
-	
+
 	// If the current page is a single post, show its title with the separator
         if (is_single()) {
             echo $sep;
             the_title();
         }
-	
+
 	// If the current page is a static page, show its title.
         if (is_page()) {
             echo the_title();
         }
-	
+
 	// if you have a static page assigned to be you posts list page. It will find the title of the static page and display it. i.e Home >> Blog
         if (is_home()){
             global $post;
             $page_for_posts_id = get_option('page_for_posts');
-            if ( $page_for_posts_id ) { 
+            if ( $page_for_posts_id ) {
                 $post = get_page($page_for_posts_id);
                 setup_postdata($post);
                 the_title();
@@ -69,7 +66,7 @@ function ultrabootstrap_setup() {
 	// Add default posts and comments RSS feed links to head.
 	add_theme_support( 'automatic-feed-links' );
 	add_theme_support( 'title-tag' );
-	add_theme_support( 'post-thumbnails' );	
+	add_theme_support( 'post-thumbnails' );
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
 		'primary' => esc_html__( 'Primary Menu', 'ultrabootstrap' ),
@@ -115,7 +112,7 @@ add_action( 'after_setup_theme', 'ultrabootstrap_content_width', 0 );
 function ultrabootstrap_filter_front_page_template( $template ) { return is_home() ? '' : $template;}
 add_filter( 'front_page_template', 'ultrabootstrap_filter_front_page_template' );
 
-function ultrabootstrap_widgets_init() {		
+function ultrabootstrap_widgets_init() {
 	register_sidebar( array(
 		'name'          => esc_html__( 'Sidebar', 'ultrabootstrap' ),
 		'id'            => 'sidebar-1',
@@ -133,7 +130,7 @@ function ultrabootstrap_widgets_init() {
 			'after_widget'  => '',
 			'before_title'  => '<h2>',
 			'after_title'   => '</h2>',
-	) );	
+	) );
 	register_sidebar( array(
 			'name'          => __('Icons There','ultrabootstrap'),
 			'id'            => 'icons',
@@ -210,7 +207,7 @@ require get_template_directory() . '/inc/jetpack.php';
 
 /**
  * Customized menu output
- */ 
+ */
 // Variable & intelligent excerpt length.
 function print_excerpt($length) { // Max excerpt length. Length is set in characters
 	global $post;
@@ -279,9 +276,9 @@ function mytheme_comment($comment, $args, $depth) {
     <?php
 }
 
-	
 
-	
+
+
 
 // custom admin login logo
 function custom_login_logo() {
@@ -442,14 +439,14 @@ break;}
 echo '</div>'.$after;
 }}
 
-// Exclude page from search 
+// Exclude page from search
 function SearchFilter($query) {
 if ($query->is_search) {
 $query->set('post_type',  array( 'post', 'reviews'));
 }
 return $query;
 }
-//add_filter('pre_get_posts','SearchFilter'); 
+//add_filter('pre_get_posts','SearchFilter');
 
 // Add post thumbnail functionality
 if ( function_exists( 'add_theme_support' ) ) {
@@ -465,7 +462,7 @@ if ( function_exists( 'add_theme_support' ) ) {
 	add_image_size('blog1-thumb', 300, 190, true);
 	add_image_size('slideshow_home',1280,600,true);
 	add_image_size('post-thumbnails',500,350,true);
-	
+
 }
 
 
@@ -545,9 +542,9 @@ function get_related_posts($post_id, $tags = array()) {
 
 function kriesi_pagination($pages = '', $range = 2)
 
-{  
+{
 
-     $showitems = ($range * 2)+1;  
+     $showitems = ($range * 2)+1;
 
 
 
@@ -573,7 +570,7 @@ function kriesi_pagination($pages = '', $range = 2)
 
          }
 
-     }   
+     }
 
 
 
@@ -605,7 +602,7 @@ function kriesi_pagination($pages = '', $range = 2)
 
 
 
-         if ($paged < $pages && $showitems < $pages) echo "<a href='".get_pagenum_link($paged + 1)."'>Next <span class='arrows'>&rsaquo;</span></a>";  
+         if ($paged < $pages && $showitems < $pages) echo "<a href='".get_pagenum_link($paged + 1)."'>Next <span class='arrows'>&rsaquo;</span></a>";
 
          if ($paged < $pages-1 &&  $paged+$range-1 < $pages && $showitems < $pages) echo "<a href='".get_pagenum_link($pages)."'>Last <span class='arrows'>&raquo;</span></a>";
 
@@ -625,7 +622,7 @@ function string_limit_words($string, $word_limit)
 
 	$words = explode(' ', $string, ($word_limit + 1));
 
-	
+
 
 	if(count($words) > $word_limit) {
 
@@ -633,7 +630,7 @@ function string_limit_words($string, $word_limit)
 
 	}
 
-	
+
 
 	return implode(' ', $words);
 
@@ -759,7 +756,7 @@ if ( $count > 0 ){
 
         $thumbnail_id = get_woocommerce_term_meta( $prod_cat->term_id, 'thumbnail_id', true );
 
-        $img = wp_get_attachment_image( $thumbnail_id, $image_size = 'shop_thumbnail', false, 
+        $img = wp_get_attachment_image( $thumbnail_id, $image_size = 'shop_thumbnail', false,
 
         array(
 
