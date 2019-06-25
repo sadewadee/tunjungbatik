@@ -2,7 +2,7 @@
 
 remove_action('woocommerce_pagination', 'woocommerce_pagination', 10);
 function woocommerce_pagination() {
-        wp_pagenavi();         
+        wp_pagenavi();
     }
 add_action( 'woocommerce_pagination', 'woocommerce_pagination', 10);
 
@@ -12,7 +12,7 @@ function mytheme_add_woocommerce_support() {
     'single_image_width'    => 300,
 
         'product_grid'          => array(
-            'default_rows'    => 3,
+            'default_rows'    => 4,
             'min_rows'        => 2,
             'max_rows'        => 8,
             'default_columns' => 4,
@@ -21,19 +21,19 @@ function mytheme_add_woocommerce_support() {
         ),
   ) );
 }
-add_action( 'after_setup_theme', 'mytheme_add_woocommerce_support' );
+//add_action( 'after_setup_theme', 'mytheme_add_woocommerce_support' );
 
 
 function remove_menus(){
 $current_user = wp_get_current_user();
 if( !current_user_can('administrator') || $current_user->user_login!='baliorange') {
   //remove_menu_page( 'index.php' );                  //Dashboard
-  //remove_menu_page( 'jetpack' );                    //Jetpack* 
+  //remove_menu_page( 'jetpack' );                    //Jetpack*
   //remove_menu_page( 'edit.php' );                   //Posts
   //remove_menu_page( 'upload.php' );                 //Media
   //remove_menu_page( 'edit.php?post_type=page' );    //Pages
   //remove_menu_page( 'edit-comments.php' );          //Comments
-  //remove_menu_page( 'themes.php' );                 //Appearance           
+  //remove_menu_page( 'themes.php' );                 //Appearance
   //remove_menu_page( 'plugins.php' );                //Plugins
   //remove_menu_page( 'options-general.php' );        //Settings
 
@@ -105,7 +105,7 @@ function sale_text( $text, $post, $product ) {
 
 	if($product->product_type=='variable') {
 	$available_variations = $product->get_available_variations();
-	$variation_id=$available_variations[0]['variation_id']; 
+	$variation_id=$available_variations[0]['variation_id'];
 	$variable_product1= new WC_Product_Variation( $variation_id );
 
 	$regular_var = $variable_product1 ->regular_price;
@@ -120,12 +120,12 @@ function sale_text( $text, $post, $product ) {
         	$discount = floor( ( ($regular - $sale) / $regular ) * 100 );
         }
     }else{ $discount = 0; }
- 
+
     $text .= $discount . '%';
- 
+
     $text .= '</span>';
     return $text;
- 
+
 }
 
 add_action("template_redirect", 'redirection_function');
@@ -311,7 +311,7 @@ function custom_login_url( $login_url='', $redirect='' )
 
 add_filter('password_hint', 'change_password_hint');
 function change_password_hint($hint) {
-  return 'Hint: The password should be at least 8 characters longer. To make it stronger, use upper and lower case letters, numbers, and symbols like ! " ? $ % ^ & ).[]'; 
+  return 'Hint: The password should be at least 8 characters longer. To make it stronger, use upper and lower case letters, numbers, and symbols like ! " ? $ % ^ & ).[]';
 }
 
 function change_menu($items){
