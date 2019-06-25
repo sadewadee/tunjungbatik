@@ -1,1 +1,1 @@
-# tunjungbatik
+#Digunakan untuk tunjungbatik.com
