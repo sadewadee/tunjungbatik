@@ -103,5 +103,195 @@ do_action( 'woocommerce_after_main_content' );
  * @hooked woocommerce_get_sidebar - 10
  */
 do_action( 'woocommerce_sidebar' );
+?>
+<div class="space60"></div>
+<!-- BLOG CONTENT -->
+<div class="blog-content">
+<div class="container">
+<div class="row">
+	<!--?php get_sidebar(); ?-->
 
+    <div class="col-md-9 col-md-push-3 blog-content">
+<!-- BREADCRUMBS -->
+<div class="bcrumbs">
+       <?php woocommerce_breadcrumb(); ?>
+</div>
+
+<header class="woocommerce-products-header">
+	<?php if ( apply_filters( 'woocommerce_show_page_title', true ) ) : ?>
+		<h1 class="woocommerce-products-header__title page-title post-title"><?php woocommerce_page_title(); ?></h1>
+<div class="space30"></div>
+<?php endif; ?>
+
+<div class="filter-wrap">
+    <div class="row">
+        <div class="col-md-8 col-sm-8">
+            <!-- View as: <span><a class="active">Grid</a> / <a href="./categories-list.html">List</a></span> -->
+						Sort by:
+						<?php woocommerce_catalog_ordering(); ?>
+        </div>
+        <div class="col-md-4 col-sm-4">
+            <span class="pull-right">
+                Show:
+                <select>
+                    <option>9 items</option>
+                    <option>18 items</option>
+                    <option>27 items</option>
+                    <option>50 items</option>
+                </select>
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="space30"></div>
+<div class="row">
+    <div class="col-md-4 col-sm-6">
+        <div class="product-item">
+            <div class="item-thumb">
+                <span class="badge new">New</span>
+                <img src="<?php bloginfo("template_url"); ?>/images/products/fashion/9.jpg" class="img-responsive" alt=""/>
+            </div>
+            <div class="product-info">
+                <h4 class="product-title"><a href="./single-product.html">Product fashion</a></h4>
+                <span class="product-price">$99.00 <em>- Pre order</em></span>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-6">
+        <div class="product-item">
+            <div class="item-thumb">
+                <img src="<?php bloginfo("template_url"); ?>/images/products/fashion/9.jpg" class="img-responsive" alt=""/>
+
+            </div>
+            <div class="product-info">
+                <h4 class="product-title"><a href="./single-product.html">Product fashion</a></h4>
+                <span class="product-price">$99.00 <em>- Pre order</em></span>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-6">
+        <div class="product-item">
+            <div class="item-thumb">
+                <span class="badge offer">-50%</span>
+                <img src="<?php bloginfo("template_url"); ?>/images/products/fashion/9.jpg" class="img-responsive" alt=""/>
+
+            </div>
+            <div class="product-info">
+                <h4 class="product-title"><a href="./single-product.html">Product fashion</a></h4>
+                <span class="product-price">$99.00 <em>- Pre order</em></span>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-6">
+        <div class="product-item">
+            <div class="item-thumb">
+                <img src="<?php bloginfo("template_url"); ?>/images/products/fashion/9.jpg" class="img-responsive" alt=""/>
+
+            </div>
+            <div class="product-info">
+                <h4 class="product-title"><a href="./single-product.html">Product fashion</a></h4>
+                <span class="product-price">$99.00 <em>- Pre order</em></span>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-6">
+        <div class="product-item">
+            <div class="item-thumb">
+              <img src="<?php bloginfo("template_url"); ?>/images/products/fashion/9.jpg" class="img-responsive" alt=""/>
+
+            </div>
+            <div class="product-info">
+                <h4 class="product-title"><a href="./single-product.html">Product fashion</a></h4>
+                <span class="product-price">$99.00 <em>- Pre order</em></span>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-6">
+        <div class="product-item">
+            <div class="item-thumb">
+                <img src="<?php bloginfo("template_url"); ?>/images/products/fashion/9.jpg" class="img-responsive" alt=""/>
+                <div class="overlay-rmore fa fa-search quickview" data-toggle="modal" data-target="#myModal"></div>
+
+            </div>
+            <div class="product-info">
+                <h4 class="product-title"><a href="./single-product.html">Product fashion</a></h4>
+                <span class="product-price">$99.00 <em>- Pre order</em></span>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-6">
+        <div class="product-item">
+            <div class="item-thumb">
+               <img src="<?php bloginfo("template_url"); ?>/images/products/fashion/9.jpg" class="img-responsive" alt=""/>
+
+            </div>
+            <div class="product-info">
+                <h4 class="product-title"><a href="./single-product.html">Product fashion</a></h4>
+                <span class="product-price">$99.00 <em>- Pre order</em></span>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-6">
+        <div class="product-item">
+            <div class="item-thumb">
+               <img src="<?php bloginfo("template_url"); ?>/images/products/fashion/9.jpg" class="img-responsive" alt=""/>
+
+            </div>
+            <div class="product-info">
+                <h4 class="product-title"><a href="./single-product.html">Product fashion</a></h4>
+                <span class="product-price">$99.00 <em>- Pre order</em></span>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-6">
+        <div class="product-item">
+            <div class="item-thumb">
+                 <img src="<?php bloginfo("template_url"); ?>/images/products/fashion/9.jpg" class="img-responsive" alt=""/>
+
+            </div>
+            <div class="product-info">
+                <h4 class="product-title"><a href="./single-product.html">Product fashion</a></h4>
+                <span class="product-price">$99.00 <em>- Pre order</em></span>
+
+            </div>
+        </div>
+    </div>
+</div>
+                            <div class="pagenav-wrap">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6">
+                                        Results: <span>1 - 9 of 86 items</span>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="pull-right">
+                                            <em>Page:</em>
+                                            <ul class="page_nav">
+                                                <li><a href="#">1</a></li>
+                                                <li><a href="#">2</a></li>
+                                                <li><a href="#">3</a></li>
+                                                <li><a href="#">4</a></li>
+                                                <li><a href="#">5</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+    <div class="space30"></div>
+    </div>
+    <?php woocommerce_get_sideba(); ?>
+</div>
+</div>
+</div>
+<div class="clearfix space60"></div>
+<?php
 get_footer( 'shop' );

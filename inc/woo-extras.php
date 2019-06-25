@@ -12,7 +12,7 @@ function mytheme_add_woocommerce_support() {
     'single_image_width'    => 300,
 
         'product_grid'          => array(
-            'default_rows'    => 4,
+            'default_rows'    => 3,
             'min_rows'        => 2,
             'max_rows'        => 8,
             'default_columns' => 4,
@@ -21,7 +21,7 @@ function mytheme_add_woocommerce_support() {
         ),
   ) );
 }
-//add_action( 'after_setup_theme', 'mytheme_add_woocommerce_support' );
+add_action( 'after_setup_theme', 'mytheme_add_woocommerce_support' );
 
 
 function remove_menus(){
@@ -46,7 +46,7 @@ if( !current_user_can('administrator') || $current_user->user_login!='baliorange
        endif;
        }
 }
-add_action( 'admin_menu', 'remove_menus',999 );
+// /add_action( 'admin_menu', 'remove_menus',999 );
 
 function wooc_extra_register_fields() {?>
        <p class="form-row form-row-first">
