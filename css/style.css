@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------
-Theme Name: Responsive Bootstrap 
+Theme Name: Responsive Bootstrap
 Version: 1.0
 -------------------------------------------------------------------*/
 
@@ -988,7 +988,7 @@ right: 0;
 }
 
 #header4 header {
-background: transparent;    
+background: transparent;
 }
 
 .side-menu {
@@ -1329,7 +1329,7 @@ text-shadow: 1px 1px 2px rgba(0,0,0,.12);
     transition: .4s;
 }*/
 
-.sync1 .item{                     
+.sync1 .item{
     margin: 5px;
     color: #FFF;
     -webkit-border-radius: 3px;
@@ -1337,7 +1337,7 @@ text-shadow: 1px 1px 2px rgba(0,0,0,.12);
     border-radius: 3px;
     text-align: center;
 }
-.sync2 .item{                         
+.sync2 .item{
     margin: 5px;
     color: #FFF;
     -webkit-border-radius: 3px;
@@ -1345,7 +1345,7 @@ text-shadow: 1px 1px 2px rgba(0,0,0,.12);
     border-radius: 3px;
     text-align: center;
     cursor: pointer;
-}           
+}
 .sync2 .item{
     opacity: 0.7;
 }
@@ -1400,7 +1400,7 @@ text-shadow: 1px 1px 2px rgba(0,0,0,.12);
     transition: all ease-in-out 0.3s;
     -webkit-transition: all ease-in-out 0.3s;
 }
-.sync1 .owl-controls .owl-buttons .owl-prev:hover, 
+.sync1 .owl-controls .owl-buttons .owl-prev:hover,
 .sync1 .owl-controls .owl-buttons .owl-next:hover{
     background: #000 none repeat scroll 0 0;
     color: #fff;
@@ -2650,7 +2650,7 @@ label.css-label {
     width: 100% !important;
 }
 .form-list .selectboxit-container .selectboxit{
-    width: 100% !important;  
+    width: 100% !important;
     border: 1px solid #aaaaaa;
     margin: 0;
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
@@ -2665,7 +2665,7 @@ label.css-label {
     line-height: 40px;
 }
 .form-list input[type="radio"], .form-list input[type="checkbox"] {
-    height: auto;   
+    height: auto;
     position: static;
     width: auto;
     margin-right: 10px;
@@ -2715,7 +2715,7 @@ label.css-label {
 .redirect-login{
     background: #ededed none repeat scroll 0 0;
     margin-bottom: 40px;
-    padding: 15px;    
+    padding: 15px;
 }
 
 
@@ -2748,7 +2748,7 @@ label.css-label {
     top: -3px;
 }
 .cart-table .return-request {
-    display: inline-block;   
+    display: inline-block;
     margin-right: 10px;
     text-align: center;
     text-transform: capitalize;
@@ -2925,7 +2925,7 @@ header {height: 152px;padding: 50px 0px 20px;}
     }
     /*new*/
     .c-text{
-        bottom: 50px;  
+        bottom: 50px;
     }
     .shipping-info-wrap .totals{
         margin-top: 30px;
@@ -3144,7 +3144,7 @@ header {height: 152px;padding: 50px 0px 20px;}
     #header2 .navbar-nav > li {
        /* float: none;*/
         margin-right: 0;
-      
+
     }
 
     .top-search3 {
@@ -3252,7 +3252,7 @@ header {height: 152px;padding: 50px 0px 20px;}
         color: #444;
     }
     .c-text{
-        bottom: 30px;  
+        bottom: 30px;
     }
     .tp-banner.slider-4 .tp-parallax-container, .tp-banner.slider-5 li:nth-child(2n) .tp-parallax-container{
         left: 5% !important;
@@ -3273,7 +3273,7 @@ header {height: 152px;padding: 50px 0px 20px;}
         float: none !important;
         margin-top: 15px;
     }
-    .shop-single .nav-tabs{       
+    .shop-single .nav-tabs{
         margin: 0;
     }
     .shop-single .nav-tabs li {
@@ -3338,7 +3338,7 @@ header {height:200px;}
 .sembunyi-destop{ display:none}
 /*new*/
 .featured-products .isotope-item {width: 100%;padding: 0px 15px;}
-.filter li{margin: 5px;}    
+.filter li{margin: 5px;}
 #header4 header {height: auto;padding: 0;}
 .ph_btn a{margin: 5px 10px;}
 .shopping-cart .table-btn .btn-black.pull-right{float: none !important;}

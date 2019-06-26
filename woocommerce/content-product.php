@@ -11,33 +11,52 @@
  * the readme will list any important changes.
  *
  * @see     https://docs.woocommerce.com/document/template-structure/
- * @author  WooThemes
  * @package WooCommerce/Templates
- * @version 3.0.0
+ * @version 3.6.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
+defined( 'ABSPATH' ) || exit;
 
 global $product;
 
-// Ensure visibility
+// Ensure visibility.
 if ( empty( $product ) || ! $product->is_visible() ) {
 	return;
 }
 ?>
-<li <?php post_class(); ?>>
+<<<<<<< HEAD
+	<?php do_action( 'woocommerce_before_shop_loop_item' ); ?>
+	<div class="col-md-4 col-sm-6" <?php wc_product_class( '', $product ); ?>>
+			<div class="product-item">
+					<div class="item-thumb">
+						<?php
+						$img = get_the_post_thumbnail_url($loop->post->ID);
+						$src = 'http://localhost/batik/wp-content/uploads/woocommerce-placeholder.png';
+						if(!empty($img)){ ?>
+						<img src="<?php echo $img ?>" class="img-responsive" alt=""/>
+					<?php } else { ?>
+						<img src="<?php echo $src ?>" class="img-responsive" alt=""/>
+					<?php } ?>
+					</div>
+					<div class="product-info">
+							<h4 class="product-title"><?php do_action( 'woocommerce_shop_loop_item_title' ); ?></h4>
+							<span class="product-price"><?php do_action( 'woocommerce_after_shop_loop_item_title' ); ?><em>-<?php do_action( 'woocommerce_after_shop_loop_item' );?></em></span>
+
+					</div>
+			</div>
+	</div>
+=======
+<li <?php wc_product_class( '', $product ); ?>>
 	<?php
 	/**
-	 * woocommerce_before_shop_loop_item hook.
+	 * Hook: woocommerce_before_shop_loop_item.
 	 *
 	 * @hooked woocommerce_template_loop_product_link_open - 10
 	 */
 	do_action( 'woocommerce_before_shop_loop_item' );
 
 	/**
-	 * woocommerce_before_shop_loop_item_title hook.
+	 * Hook: woocommerce_before_shop_loop_item_title.
 	 *
 	 * @hooked woocommerce_show_product_loop_sale_flash - 10
 	 * @hooked woocommerce_template_loop_product_thumbnail - 10
@@ -45,14 +64,14 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	do_action( 'woocommerce_before_shop_loop_item_title' );
 
 	/**
-	 * woocommerce_shop_loop_item_title hook.
+	 * Hook: woocommerce_shop_loop_item_title.
 	 *
 	 * @hooked woocommerce_template_loop_product_title - 10
 	 */
 	do_action( 'woocommerce_shop_loop_item_title' );
 
 	/**
-	 * woocommerce_after_shop_loop_item_title hook.
+	 * Hook: woocommerce_after_shop_loop_item_title.
 	 *
 	 * @hooked woocommerce_template_loop_rating - 5
 	 * @hooked woocommerce_template_loop_price - 10
@@ -60,7 +79,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	do_action( 'woocommerce_after_shop_loop_item_title' );
 
 	/**
-	 * woocommerce_after_shop_loop_item hook.
+	 * Hook: woocommerce_after_shop_loop_item.
 	 *
 	 * @hooked woocommerce_template_loop_product_link_close - 5
 	 * @hooked woocommerce_template_loop_add_to_cart - 10
@@ -68,3 +87,4 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	do_action( 'woocommerce_after_shop_loop_item' );
 	?>
 </li>
+>>>>>>> 58dfd44e23540279498e68b4c41bcdd2e33a789d
