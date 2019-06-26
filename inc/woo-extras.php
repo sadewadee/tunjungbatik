@@ -323,6 +323,7 @@ function change_menu($items){
 
 }
 add_filter('wp_nav_menu_objects', 'change_menu');
+<<<<<<< HEAD
 
 add_action( 'woocommerce_before_shop_loop', 'ps_selectbox', 25 );
 function ps_selectbox() {
@@ -388,3 +389,5 @@ $attachment_ids = $product->get_gallery_attachment_ids();
 </div>
   <?php
 }
+=======
+>>>>>>> 58dfd44e23540279498e68b4c41bcdd2e33a789d
