@@ -2,24 +2,23 @@
 
 remove_action('woocommerce_pagination', 'woocommerce_pagination', 10);
 function woocommerce_pagination() {
-        wp_pagenavi();         
+        wp_pagenavi();
     }
 add_action( 'woocommerce_pagination', 'woocommerce_pagination', 10);
 
-function mytheme_add_woocommerce_support() {
-  add_theme_support( 'woocommerce', array(
-    'thumbnail_image_width' => 150,
-    'single_image_width'    => 300,
+add_action( 'init', 'custom_fix_thumbnail' );
 
-        'product_grid'          => array(
-            'default_rows'    => 3,
-            'min_rows'        => 2,
-            'max_rows'        => 8,
-            'default_columns' => 4,
-            'min_columns'     => 2,
-            'max_columns'     => 5,
-        ),
-  ) );
+function custom_fix_thumbnail() {
+    add_filter('woocommerce_placeholder_img_src', 'custom_woocommerce_placeholder_img_src');
+
+    function custom_woocommerce_placeholder_img_src( $src ) {
+        $src = get_template_directory_uri().'/images/products/single/3.jpg';
+
+        return $src;
+    }
+}
+function mytheme_add_woocommerce_support() {
+	add_theme_support( 'woocommerce' );
 }
 add_action( 'after_setup_theme', 'mytheme_add_woocommerce_support' );
 
@@ -28,12 +27,12 @@ function remove_menus(){
 $current_user = wp_get_current_user();
 if( !current_user_can('administrator') || $current_user->user_login!='baliorange') {
   //remove_menu_page( 'index.php' );                  //Dashboard
-  //remove_menu_page( 'jetpack' );                    //Jetpack* 
+  //remove_menu_page( 'jetpack' );                    //Jetpack*
   //remove_menu_page( 'edit.php' );                   //Posts
   //remove_menu_page( 'upload.php' );                 //Media
   //remove_menu_page( 'edit.php?post_type=page' );    //Pages
   //remove_menu_page( 'edit-comments.php' );          //Comments
-  //remove_menu_page( 'themes.php' );                 //Appearance           
+  //remove_menu_page( 'themes.php' );                 //Appearance
   //remove_menu_page( 'plugins.php' );                //Plugins
   //remove_menu_page( 'options-general.php' );        //Settings
 
@@ -46,7 +45,7 @@ if( !current_user_can('administrator') || $current_user->user_login!='baliorange
        endif;
        }
 }
-add_action( 'admin_menu', 'remove_menus',999 );
+// /add_action( 'admin_menu', 'remove_menus',999 );
 
 function wooc_extra_register_fields() {?>
        <p class="form-row form-row-first">
@@ -105,7 +104,7 @@ function sale_text( $text, $post, $product ) {
 
 	if($product->product_type=='variable') {
 	$available_variations = $product->get_available_variations();
-	$variation_id=$available_variations[0]['variation_id']; 
+	$variation_id=$available_variations[0]['variation_id'];
 	$variable_product1= new WC_Product_Variation( $variation_id );
 
 	$regular_var = $variable_product1 ->regular_price;
@@ -120,12 +119,12 @@ function sale_text( $text, $post, $product ) {
         	$discount = floor( ( ($regular - $sale) / $regular ) * 100 );
         }
     }else{ $discount = 0; }
- 
+
     $text .= $discount . '%';
- 
+
     $text .= '</span>';
     return $text;
- 
+
 }
 
 add_action("template_redirect", 'redirection_function');
@@ -311,7 +310,7 @@ function custom_login_url( $login_url='', $redirect='' )
 
 add_filter('password_hint', 'change_password_hint');
 function change_password_hint($hint) {
-  return 'Hint: The password should be at least 8 characters longer. To make it stronger, use upper and lower case letters, numbers, and symbols like ! " ? $ % ^ & ).[]'; 
+  return 'Hint: The password should be at least 8 characters longer. To make it stronger, use upper and lower case letters, numbers, and symbols like ! " ? $ % ^ & ).[]';
 }
 
 function change_menu($items){
@@ -324,3 +323,68 @@ function change_menu($items){
 
 }
 add_filter('wp_nav_menu_objects', 'change_menu');
+
+add_action( 'woocommerce_before_shop_loop', 'ps_selectbox', 25 );
+function ps_selectbox() {
+    $per_page = filter_input(INPUT_GET, 'perpage', FILTER_SANITIZE_NUMBER_INT);
+    echo '<span class="pull-right"> Show items : ';
+    echo '<select onchange="if (this.value) window.location.href=this.value">';
+    $orderby_options = array(
+        '8' => '8',
+        '16' => '16',
+        '32' => '32',
+        '64' => '64'
+    );
+    foreach( $orderby_options as $value => $label ) {
+        echo "<option ".selected( $per_page, $value )." value='?perpage=$value'>$label items</option>";
+    }
+    echo '</select>';
+    echo '</span>';
+}
+
+add_action( 'pre_get_posts', 'ps_pre_get_products_query' );
+function ps_pre_get_products_query( $query ) {
+   $per_page = filter_input(INPUT_GET, 'perpage', FILTER_SANITIZE_NUMBER_INT);
+   if( $query->is_main_query() && !is_admin() && is_post_type_archive( 'product' ) ){
+        $query->set( 'posts_per_page', $per_page );
+    }
+}
+
+function woocommerce_slider()
+{
+global $product;
+$attachment_ids = $product->get_gallery_attachment_ids();
+?>
+<div class="owl-carousel prod-slider sync1">
+<?php
+  foreach( $attachment_ids as $attachment_id ) {
+      $image_link = wp_get_attachment_image_src( $attachment_id, 'slider_product' )[0]; ?>
+        <div class="item">
+          <?php if (!empty($image_link)) : ?>
+          <img src="<?php  echo $image_link; ?>">
+          <a href="<?php  echo $image_link; ?>" rel="prettyPhoto[gallery2]" title="Product" class="caption-link"><i class="fa fa-arrows-alt"></i></a>
+          <?php else : ?>
+              <img src="<?php echo get_template_directory_uri(); ?>/images/no-blog-thumbnail.jpg" title="<?php the_title_attribute(); ?>" alt="<?php the_title_attribute(); ?>" class="img-responsive" />
+          <?php endif; ?>
+</div>
+      <?php
+  }
+  ?>
+</div>
+<div  class="owl-carousel sync2">
+<?php
+  foreach( $attachment_ids as $attachment_id ) {
+      $image_link = wp_get_attachment_image_src( $attachment_id, 'slider_product' )[0]; ?>
+        <div class="item">
+          <?php if (!empty($image_link)) : ?>
+<div class="item"> <img src="<?php  echo $image_link; ?>" alt=""> </div>
+          <?php else : ?>
+<div class="item"> <img src="<?php bloginfo("template_url"); ?>/images/products/single/1.jpg" alt=""> </div>
+          <?php endif; ?>
+</div>
+      <?php
+  }
+  ?>
+</div>
+  <?php
+}
