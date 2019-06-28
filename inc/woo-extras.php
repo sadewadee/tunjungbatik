@@ -69,11 +69,19 @@ add_filter( 'wp_nav_menu_items', 'dynamic_label_change', 10, 2 );
 function dynamic_label_change( $items, $args ) { if (!is_user_logged_in() && $args->theme_location == 'shop') { $items = str_replace("My account", "Login", $items); } return $items; }
 add_filter( 'wp_nav_menu_items', 'dynamics_label_change', 10, 2 );
 function dynamics_label_change( $items, $args ) { if ($args->theme_location == 'primary') { $items = str_replace("Cek Resi", "", $items); } return $items; }
+remove_action( 
+    'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
+remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15 );
+remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
+add_action( 'woocommerce_after_single_product', 'woocommerce_output_related_products', 25 );
+remove_action('woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 20,0);
+remove_action('woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 20,0);
+
 
 //delete menu
 $menu_name   = 451;//name,id,slug
 wp_delete_nav_menu($menu_name);
-
+  
 function current_paged( $var = '' ) {
     if( empty( $var ) ) {
         global $wp_query;
@@ -97,22 +105,25 @@ function current_paged( $var = '' ) {
 
 add_filter( 'woocommerce_sale_flash', 'sale_text', 10, 3 );
 function sale_text( $text, $post, $product ) {
-    $text = '<span class="onsale">';
+  $text = '';
+  if($product->product_type != 'grouped'){
+    $text .= '<span class="badge onsale">';
 
     $regular = $product->regular_price;
     $sale = $product->sale_price;
 
-	if($product->product_type=='variable') {
+	if($product->product_type == 'variable') {
 	$available_variations = $product->get_available_variations();
 	$variation_id=$available_variations[0]['variation_id'];
 	$variable_product1= new WC_Product_Variation( $variation_id );
 
 	$regular_var = $variable_product1 ->regular_price;
 	$sales_var = $variable_product1 ->sale_price;
+    $discount = floor( ( ($regular_var - $sales_var) / $regular_var ) * 100 );
+	
 
-		$discount = floor( ( ($regular_var - $sales_var) / $regular_var ) * 100 );
-	}
-    elseif( isset( $sale ) ) {
+
+  }elseif( isset( $sale ) ) {
 
     	if(!empty($regular && $sale))
         {
@@ -123,6 +134,7 @@ function sale_text( $text, $post, $product ) {
     $text .= $discount . '%';
 
     $text .= '</span>';
+  }
     return $text;
 
 }
@@ -139,9 +151,9 @@ function my_woocommerce_catalog_orderby( $orderby ) {
     unset($orderby['popularity']);
     return $orderby;
 }
-add_filter( 'woocommerce_catalog_orderby', 'my_woocommerce_catalog_orderby', 20 );
+//add_filter( 'woocommerce_catalog_orderby', 'my_woocommerce_catalog_orderby', 20 );
 
-add_filter('woocommerce_catalog_orderby', 'wc_customize_product_sorting');
+//add_filter('woocommerce_catalog_orderby', 'wc_customize_product_sorting');
 
 function wc_customize_product_sorting($sorting_options){
     $sorting_options = array(
@@ -323,18 +335,16 @@ function change_menu($items){
 
 }
 add_filter('wp_nav_menu_objects', 'change_menu');
-<<<<<<< HEAD
 
-add_action( 'woocommerce_before_shop_loop', 'ps_selectbox', 25 );
+add_action( 'woocommerce_before_shop_loop', 'ps_selectbox', 40 );
 function ps_selectbox() {
     $per_page = filter_input(INPUT_GET, 'perpage', FILTER_SANITIZE_NUMBER_INT);
     echo '<span class="pull-right"> Show items : ';
     echo '<select onchange="if (this.value) window.location.href=this.value">';
     $orderby_options = array(
-        '8' => '8',
-        '16' => '16',
-        '32' => '32',
-        '64' => '64'
+        '6' => '6',
+        '9' => '9',
+        '12' => '12'
     );
     foreach( $orderby_options as $value => $label ) {
         echo "<option ".selected( $per_page, $value )." value='?perpage=$value'>$label items</option>";
@@ -365,7 +375,7 @@ $attachment_ids = $product->get_gallery_attachment_ids();
           <img src="<?php  echo $image_link; ?>">
           <a href="<?php  echo $image_link; ?>" rel="prettyPhoto[gallery2]" title="Product" class="caption-link"><i class="fa fa-arrows-alt"></i></a>
           <?php else : ?>
-              <img src="<?php echo get_template_directory_uri(); ?>/images/no-blog-thumbnail.jpg" title="<?php the_title_attribute(); ?>" alt="<?php the_title_attribute(); ?>" class="img-responsive" />
+              <img src="<?php echo get_template_directory_uri(); ?>/images/products/single/2.jpg" title="<?php the_title_attribute(); ?>" alt="<?php the_title_attribute(); ?>" class="img-responsive" />
           <?php endif; ?>
 </div>
       <?php
@@ -389,5 +399,79 @@ $attachment_ids = $product->get_gallery_attachment_ids();
 </div>
   <?php
 }
-=======
->>>>>>> 58dfd44e23540279498e68b4c41bcdd2e33a789d
+
+add_action( 'woocommerce_before_single_product', 'check_if_variable_first' );
+function check_if_variable_first(){
+    if ( is_product() ) {
+        global $post;
+        $product = wc_get_product( $post->ID );
+        if ( $product->is_type( 'variable' ) ) {
+            // removing the price of variable products
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
+ 
+// Change location of
+add_action( 'woocommerce_single_product_summary', 'custom_wc_template_single_price', 10 );
+function custom_wc_template_single_price(){
+    global $product;
+ 
+// Variable product only
+if($product->is_type('variable')):
+ 
+    // Main Price
+    $prices = array( $product->get_variation_price( 'min', true ), $product->get_variation_price( 'max', true ) );
+    $price = $prices[0] !== $prices[1] ? sprintf( __( 'From: %1$s', 'woocommerce' ), wc_price( $prices[0] ) ) : wc_price( $prices[0] );
+ 
+    // Sale Price
+    $prices = array( $product->get_variation_regular_price( 'min', true ), $product->get_variation_regular_price( 'max', true ) );
+    sort( $prices );
+    $saleprice = $prices[0] !== $prices[1] ? sprintf( __( 'From: %1$s', 'woocommerce' ), wc_price( $prices[0] ) ) : wc_price( $prices[0] );
+ 
+    if ( $price !== $saleprice && $product->is_on_sale() ) {
+        $price = '<del>' . $saleprice . $product->get_price_suffix() . '</del> <ins>' . $price . $product->get_price_suffix() . '</ins>';
+    }
+ 
+    ?>
+    <style>
+        div.woocommerce-variation-price,
+        div.woocommerce-variation-availability,
+        div.hidden-variable-price {
+            height: 0px !important;
+            overflow:hidden;
+            position:relative;
+            line-height: 0px !important;
+            font-size: 0% !important;
+        }
+    </style>
+    <script>
+    jQuery(document).ready(function($) {
+        $('select').blur( function(){
+            if( '' != $('input.variation_id').val() ){
+                $('p.price').html($('div.woocommerce-variation-price > span.price').html()).append('<p class="availability">'+$('div.woocommerce-variation-availability').html()+'</p>');
+                console.log($('input.variation_id').val());
+            } else {
+                $('p.price').html($('div.hidden-variable-price').html());
+                if($('p.availability'))
+                    $('p.availability').remove();
+                console.log('NULL');
+            }
+        });
+    });
+    </script>
+    <?php
+ 
+    echo '<p class="price">'.$price.'</p>
+   <div class="hidden-variable-price" >'.$price.'</div>';
+ 
+endif;
+}
+ 
+        }
+    }
+}
+
+function wpsites_query( $query ) {
+if ( $query->is_front_page()) {
+        $query->set( 'posts_per_page', 6 );
+    }
+}
+add_action( 'pre_get_posts', 'wpsites_query' );

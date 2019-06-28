@@ -28,9 +28,11 @@
 </div>
 </div>
 </footer>
+		<?php wp_footer(); ?>
         <div id="backtotop"><i class="fa fa-chevron-up"></i></div>
- 		<script src="<?php bloginfo("template_url"); ?>/js/jquery.js"></script>   
+        
         <script src="<?php bloginfo("template_url"); ?>/js/menu-js.js"></script>
+        <script src="<?php bloginfo("template_url"); ?>/js/toggle-menu.js"></script>
         <!-- Javascript -->
         <script src="<?php bloginfo("template_url"); ?>/js/bs_leftnavi.js"></script>
          <script src="<?php bloginfo("template_url"); ?>/js/bootstrap.min.js"></script>
@@ -46,6 +48,5 @@
         <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
         <script src="<?php bloginfo("template_url"); ?>/js/vendors/select/jquery.selectBoxIt.min.js"></script>
         <script src="<?php bloginfo("template_url"); ?>/js/main.js"></script>
-		<?php wp_footer(); ?> 
     </body>
 </html>

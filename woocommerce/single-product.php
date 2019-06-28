@@ -28,9 +28,18 @@ get_header( 'shop' ); ?>
 		 * @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
 		 * @hooked woocommerce_breadcrumb - 20
 		 */
-		do_action( 'woocommerce_before_main_content' );
+		//do_action( 'woocommerce_before_main_content' );
 	?>
-
+<div class="space60"></div>
+ <!-- MAIN CONTENT -->
+<div class="shop-single">
+<div class="container">
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+    <!-- BREADCRUMBS -->
+<div class="bcrumbs">
+       <?php woocommerce_breadcrumb(); ?>
+</div>
 		<?php while ( have_posts() ) : the_post(); ?>
 
 			<?php wc_get_template_part( 'content', 'single-product' ); ?>
@@ -52,9 +61,15 @@ get_header( 'shop' ); ?>
 		 *
 		 * @hooked woocommerce_get_sidebar - 10
 		 */
-		do_action( 'woocommerce_sidebar' );
+		//do_action( 'woocommerce_sidebar' );
 	?>
+ </div>
+</div>
+</div>
+</div>
 
+
+<div class="clearfix space60"></div>
 <?php get_footer( 'shop' );
 
 /* Omit closing PHP tag at the end of PHP files to avoid "headers already sent" issues. */
