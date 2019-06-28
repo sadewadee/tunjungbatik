@@ -476,6 +476,7 @@ include_once('panel/widgets/search-widget.php');
 include_once('panel/widgets/facebook-like-widget.php');
 include_once('panel/widgets/recent-posts-widget.php');
 include_once('panel/widgets/recent-posts-text.php');
+include_once('plugin/collapse/woocommerce-collapsing-categories.php');
 
 // UI Panel Options
 include_once('panel/panel-options.php');

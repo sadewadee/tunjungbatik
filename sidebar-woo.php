@@ -13,7 +13,7 @@
 
 
 
-<!--  <div class="side-widget space30 sidebar">
+ <div class="side-widget space30 sidebar">
  <h3><span>Shop by</span></h3>
     <div id="gw-sidebar" class="gw-sidebar">
     <div class="nano-content">
@@ -41,5 +41,5 @@
       </ul>
     </div>
   </div>
-   </div>  -->
+   </div> 
 </aside>
