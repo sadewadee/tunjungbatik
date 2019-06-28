@@ -1,1 +1,10 @@
-#Digunakan untuk tunjungbatik.com
+/*
+Theme Name: Tanjung Batik Themes
+Theme URI: http://boc.co.id/
+Author: the BOC team, Surya Dharmawan, Sadewadee
+Author URI: http://boc.co.id/
+Description: This theme is only used for online sales, with many interesting functions and beautifully displayed in a unique way. The design details are abundant, starting with attractive color schemes and matching slider images, beautiful typography and icons, and flexible layouts that look great on any device, big or small. Only made for tanjungbatik.com
+Version: 1.0
+Tags: black, brown, orange, tan, white, yellow, light, one-column, two-columns, right-sidebar, flexible-width, custom-header, custom-menu, editor-style, featured-images, microformats, post-formats, rtl-language-support, sticky-post, translation-ready
+Text Domain: tatephoo
+*/
